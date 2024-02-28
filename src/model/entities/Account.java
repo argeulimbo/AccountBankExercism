@@ -55,12 +55,18 @@ public class Account {
 		this.balance += amount;
 	}
 	
-	public void withdraw(Double amount, Double balance, Double withdrawLimit) throws DomainException {
-		if (balance < amount || balance < withdrawLimit) {
-			throw new DomainException("Insuficient balance for make the withdraw!");
-		}
+	public void withdraw(double amount) {
 		this.balance -= amount;
 		this.withdrawLimit -= amount;
+	}
+	
+	private void validateWithdraw(double amount) {
+		if (amount > getWithdrawLimit()) {
+			throw new DomainException("ERROR: The amount exceds withdraw limit.");
+		}
+		if (amount > getBalance()) {
+			throw new DomainException("ERROR: Insuficient balance.");
+		}
 	}
 	
 	@Override

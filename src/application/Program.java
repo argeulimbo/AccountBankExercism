@@ -12,7 +12,6 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 		Account account = new Account();
 		
-		try {
 		System.out.println("Enter account data: ");
 		System.out.print("Number: ");
 		int number = sc.nextInt();
@@ -28,13 +27,14 @@ public class Program {
 		System.out.println(account.toString());
 		
 		System.out.print("Enter amount for withdraw: ");
-		double amount = sc.nextDouble();
+		double amount = sc.nextDouble();		
 		
-		
-			account.withdraw(amount, balance, withdrawLimit);
-		} catch (DomainException insuficientBalance) {
+		try {
+			account.withdraw(amount);
+			System.out.println(account.toString());
+		} catch (DomainException e) {
 			System.out.println();
-			System.out.println("Insuficient balance for make the withdraw!");
+			System.out.println(e.getMessage());
 		}
 		System.out.println(account.toString());
 		
